@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  rpid: 1
+  short_name: MyString
+  long_name: MyString
+  description: MyText
+
+two:
+  rpid: 1
+  short_name: MyString
+  long_name: MyString
+  description: MyText
