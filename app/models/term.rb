@@ -14,12 +14,13 @@ class Term < ActiveRecord::Base
 		terms.each{|term|
 			radlex_term = Array.new
 			radlex_terms = Term.where("name LIKE ?", "%#{term}%")
+			radlex_terms_w_procedures = Array.new
 			radlex_terms.each{|rterm|
-				if rterm.procedures.empty?
-					radlex_terms.delete(rterm)
+				if !rterm.procedures.empty?
+					radlex_terms_w_procedures << rterm
 				end
 			}
-			res[count] = radlex_terms
+			res[count] = radlex_terms_w_procedures
 			count = count + 1
 		}
 		return res
