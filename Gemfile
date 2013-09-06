@@ -11,7 +11,7 @@ gem 'json'
 gem 'kaminari'
 gem 'seed_dump'
 
-gem "pg", "~> 0.13.2", :group => :production
+gem "pg"#, "~> 0.13.2", :group => :production
 
 
 # Gems used only for assets and not required

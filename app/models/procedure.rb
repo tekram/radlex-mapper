@@ -6,7 +6,7 @@ class Procedure < ActiveRecord::Base
 	
 	has_and_belongs_to_many :terms
 	
-	def self.import()
+	def self.import
 		CSV.foreach("playbook.csv") do |row|
 			#puts row[0]
 			#Term.create(

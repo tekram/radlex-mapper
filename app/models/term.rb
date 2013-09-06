@@ -35,19 +35,4 @@ class Term < ActiveRecord::Base
 		end 
 	end
 
-	def self.setParentId
-		Term.all.each { |term|
-			if term.rid_parent != nil
-				puts term.name
-				parent = Term.find_by_rid(term.rid_parent)
-				if parent != nil
-					term.parent_id = parent.id
-					term.save
-				end
-			#else 
-			#	puts "Nope"
-			end
-		}
-	end
-
 end
