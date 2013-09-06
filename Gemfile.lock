@@ -117,7 +117,7 @@ DEPENDENCIES
   jquery-rails
   json
   kaminari
-  pg (~> 0.13.2)
+  pg
   rails (= 3.2.0)
   sass-rails (~> 3.2.3)
   seed_dump
