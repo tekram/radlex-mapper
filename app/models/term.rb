@@ -28,7 +28,7 @@ class Term < ActiveRecord::Base
 	def self.import
 		CSV.foreach("Radlex3.9.csv") do |row|
 			#Term.create(
-			puts row
+			#puts row
 			rid = row[1].sub("RID","") if row[1] != nil
 			rid_parent = row[2].sub("RID","") if row[2] != nil
 			Term.create(:name => row[0], :rid => rid, :rid_parent => rid_parent)
