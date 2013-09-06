@@ -5,11 +5,14 @@ gem 'rails', '3.2.0'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3'
+gem 'sqlite3', :group => :development
 gem 'twitter-bootstrap-rails'
 gem 'json'
 gem 'kaminari'
 gem 'seed_dump'
+
+gem "pg", "~> 0.13.2", :group => :production
+
 
 # Gems used only for assets and not required
 # in production environments by default.
