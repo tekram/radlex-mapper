@@ -9,13 +9,18 @@ class Term < ActiveRecord::Base
   
   def self.findRadlex(terms)
 		res = Array.new
+		count = 0
+		radlex_terms = Array.new
 		terms.each{|term|
+			radlex_term = Array.new
 			radlex_terms = Term.where("name LIKE ?", "%#{term}%")
 			radlex_terms.each{|rterm|
 				if rterm.procedures.empty?
 					radlex_terms.delete(rterm)
 				end
 			}
+			res[count] = radlex_terms
+			count = count + 1
 		}
 		return res
   end

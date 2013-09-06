@@ -1,22 +1,24 @@
 <%- model_class = Term -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+  <h1>Radlex <%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
 </div>
 <table class="table table-striped">
   <thead>
     <tr>
-      <th><%= model_class.human_attribute_name(:name) %></th>
       <th><%= model_class.human_attribute_name(:rid) %></th>
+      <th><%= model_class.human_attribute_name(:name) %></th>
       <th><%= model_class.human_attribute_name(:rid_parent) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
   <tbody>
     <% @terms.each do |term| %>
       <tr>
-        <td><%= link_to term.name, term_path(term) %></td>
-        <td><%= term.rid %></td>
+        <td><%= link_to term.id, term_path(term) %></td>
+        <td><%= term.name %></td>
         <td><%= term.rid_parent %></td>
+        <td><%=l term.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_term_path(term), :class => 'btn btn-mini' %>
@@ -30,10 +32,5 @@
     <% end %>
   </tbody>
 </table>
-
-<%= #link_to t('.new', :default => t("helpers.links.new")),
-    #       new_term_path,
-    #        :class => 'btn btn-primary' 
-    %>
 
 <%= paginate @terms %>

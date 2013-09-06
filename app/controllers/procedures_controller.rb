@@ -22,8 +22,8 @@ class ProceduresController < ApplicationController
   end
 
 	def map
-		terms = params[:name].split(" ") if params[:name]
-		@terms = Term.findRadlex(terms) if params[:name]
+		parsedterms = params[:name].split(" ") if params[:name]
+		@termsarray = Term.findRadlex(parsedterms) if params[:name]
 	end
 
   # GET /procedures/new

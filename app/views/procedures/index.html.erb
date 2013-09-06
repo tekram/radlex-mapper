@@ -1,11 +1,10 @@
 <%- model_class = Procedure -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+  <h1>Playbook Terms</h1>
 </div>
 <table class="table table-striped">
   <thead>
     <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
       <th><%= model_class.human_attribute_name(:rpid) %></th>
       <th><%= model_class.human_attribute_name(:short_name) %></th>
       <th><%= model_class.human_attribute_name(:long_name) %></th>
@@ -18,7 +17,6 @@
     <% @procedures.each do |procedure| %>
       <tr>
         <td><%= link_to procedure.id, procedure_path(procedure) %></td>
-        <td><%= procedure.rpid %></td>
         <td><%= procedure.short_name %></td>
         <td><%= procedure.long_name %></td>
         <td><%= procedure.description %></td>
@@ -37,6 +35,4 @@
   </tbody>
 </table>
 
-<%= link_to t('.new', :default => t("helpers.links.new")),
-            new_procedure_path,
-            :class => 'btn btn-primary' %>
+<%= paginate @procedures %>

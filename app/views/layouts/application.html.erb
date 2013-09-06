@@ -49,8 +49,8 @@
           <a class="brand" href="#">Mapped</a>
           <div class="container nav-collapse">
             <ul class="nav">
-              <li><%= link_to "Link1", "/path1"  %></li>
-              <li><%= link_to "Link2", "/path2"  %></li>
+              <li><%= link_to "RadLex Terms", terms_path  %></li>
+              <li><%= link_to "Playbook Terms", procedures_path  %></li>
               <li><%= link_to "Link3", "/path3"  %></li>
             </ul>
           </div><!--/.nav-collapse -->
@@ -66,12 +66,13 @@
           </div>
           <div class="span3">
             <div class="well sidebar-nav">
-              <h3>Sidebar</h3>
+              <h3>Map a Name</h3>
               <ul class="nav nav-list">
-                <li class="nav-header">Sidebar</li>
-                <li><%= link_to "Link1", "/path1"  %></li>
-                <li><%= link_to "Link2", "/path2"  %></li>
-                <li><%= link_to "Link3", "/path3"  %></li>
+                <%= form_tag({:controller => :procedures, :action => :map }, :method => "get")  do %>
+									<li class="nav-header">Procedure Name</li>
+									<%= text_field_tag(:name) %>
+									<%= submit_tag("Go", :name => nil) %>
+								<% end %>
               </ul>
             </div><!--/.well -->
           </div><!--/span-->
