@@ -3,6 +3,10 @@
   <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
 </div>
 
+<% @intersection.each do |proc| %>
+	<%= link_to proc.short_name, procedure_path(proc) %>, 
+<% end %>
+
 <table class="table table-striped">
   <thead>
     <tr>

@@ -1,0 +1,27 @@
+<h1>Listing abreviations</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Abreviated name</th>
+    <th>Rid</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @abreviations.each do |abreviation| %>
+  <tr>
+    <td><%= abreviation.name %></td>
+    <td><%= abreviation.abreviated_name %></td>
+    <td><%= abreviation.rid %></td>
+    <td><%= link_to 'Show', abreviation %></td>
+    <td><%= link_to 'Edit', edit_abreviation_path(abreviation) %></td>
+    <td><%= link_to 'Destroy', abreviation, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Abreviation', new_abreviation_path %>

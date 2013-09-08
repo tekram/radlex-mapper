@@ -9,8 +9,8 @@
       <th><%= model_class.human_attribute_name(:short_name) %></th>
       <th><%= model_class.human_attribute_name(:long_name) %></th>
       <th><%= model_class.human_attribute_name(:description) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+      <th>RadLex Terms</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -20,15 +20,12 @@
         <td><%= procedure.short_name %></td>
         <td><%= procedure.long_name %></td>
         <td><%= procedure.description %></td>
-        <td><%=l procedure.created_at %></td>
+        <td><% procedure.terms.each do |term| %>
+							<%= term.name %> 
+						<% end %>
+        </td>
         <td>
-          <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_procedure_path(procedure), :class => 'btn btn-mini' %>
-          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                      procedure_path(procedure),
-                      :method => :delete,
-                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                      :class => 'btn btn-mini btn-danger' %>
+          
         </td>
       </tr>
     <% end %>

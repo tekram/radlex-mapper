@@ -1,0 +1,2 @@
+module AbreviationsHelper
+end

@@ -6,6 +6,16 @@ class Procedure < ActiveRecord::Base
 	
 	has_and_belongs_to_many :terms
 	
+	def self.findIntersection(array)
+		count = 1
+		array = array.flatten
+		res = array[0].procedures
+		array.each {|ele|
+			res = ele.procedures & res
+		}
+		return res
+	end
+	
 	def self.import
 		CSV.foreach("playbook.csv") do |row|
 			#puts row[0]

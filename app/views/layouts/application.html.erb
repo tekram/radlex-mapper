@@ -70,7 +70,7 @@
               <ul class="nav nav-list">
                 <%= form_tag({:controller => :procedures, :action => :map }, :method => "get")  do %>
 									<li class="nav-header">Procedure Name</li>
-									<%= text_field_tag(:name) %>
+									<%= text_field_tag(:name, params[:name]) %>
 									<%= submit_tag("Go", :name => nil) %>
 								<% end %>
               </ul>

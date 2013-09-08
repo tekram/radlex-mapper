@@ -26,6 +26,18 @@ class Term < ActiveRecord::Base
 		return res
   end
   
+  def self.substituteTerms(terms)
+		count = 0
+		terms.each{|term|
+			subterm = Abreviation.find_by_abreviated_name(term)
+			if subterm
+				terms[count] = subterm.name
+			end
+			count = count + 1
+		}
+		return terms
+  end
+  
 	def self.import
 		CSV.foreach("Radlex3.9.csv") do |row|
 			#Term.create(

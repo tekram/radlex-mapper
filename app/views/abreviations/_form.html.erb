@@ -1,0 +1,29 @@
+<%= form_for(@abreviation) do |f| %>
+  <% if @abreviation.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@abreviation.errors.count, "error") %> prohibited this abreviation from being saved:</h2>
+
+      <ul>
+      <% @abreviation.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :abreviated_name %><br />
+    <%= f.text_field :abreviated_name %>
+  </div>
+  <div class="field">
+    <%= f.label :rid %><br />
+    <%= f.number_field :rid %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

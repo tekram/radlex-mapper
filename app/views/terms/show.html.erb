@@ -1,6 +1,6 @@
 <%- model_class = Term -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+  <h1>RadLex <%=t '.title', :default => model_class.model_name.human.titleize %></h1>
 </div>
 
 <dl class="dl-horizontal">
@@ -12,14 +12,29 @@
   <dd><%= @term.rid_parent %></dd>
 </dl>
 
-<div class="form-actions">
-  <%= link_to t('.back', :default => t("helpers.links.back")),
-              terms_path, :class => 'btn'  %>
-  <%= link_to t('.edit', :default => t("helpers.links.edit")),
-              edit_term_path(@term), :class => 'btn' %>
-  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-              term_path(@term),
-              :method => 'delete',
-              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-              :class => 'btn btn-danger' %>
-</div>
+Playbook Terms that this RadLex term is mapped to. 
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:rpid) %></th>
+      <th><%= model_class.human_attribute_name(:short_name) %></th>
+      <th><%= model_class.human_attribute_name(:long_name) %></th>
+      <th><%= model_class.human_attribute_name(:description) %></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @term.procedures.each do |procedure| %>
+      <tr>
+        <td><%= link_to procedure.id, procedure_path(procedure) %></td>
+        <td><%= procedure.short_name %></td>
+        <td><%= procedure.long_name %></td>
+        <td><%= procedure.description %></td>
+        <td>
+          
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

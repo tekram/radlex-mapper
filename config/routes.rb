@@ -1,5 +1,7 @@
 Mapped::Application.routes.draw do
 
+  resources :abreviations
+
   resources :procedures do
 		collection do
 			get 'map'

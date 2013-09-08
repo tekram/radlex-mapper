@@ -23,7 +23,9 @@ class ProceduresController < ApplicationController
 
 	def map
 		parsedterms = params[:name].split(" ") if params[:name]
+		parsedterms = Term.substituteTerms(parsedterms)
 		@termsarray = Term.findRadlex(parsedterms) if params[:name]
+		@intersection = Procedure.findIntersection(@termsarray)
 	end
 
   # GET /procedures/new
