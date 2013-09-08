@@ -1,11 +1,24 @@
 <%- model_class = Term -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+  <h1>Mapping Your Search "<%= params[:name] %>"</h1>
 </div>
+
+<h4>List of possible Playbook terms that map to your request </h4><br />
 
 <% @intersection.each do |proc| %>
 	<%= link_to proc.short_name, procedure_path(proc) %>, 
 <% end %>
+
+<% if @intersection.empty? %>
+	None.
+<% end %>
+
+<br /><br />
+
+
+<br class="table table-striped"/>
+
+<h4>List of all RadLex terms that match to your request with list of associated Playbook terms </h4><br />
 
 <table class="table table-striped">
   <thead>

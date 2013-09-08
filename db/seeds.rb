@@ -5,7 +5,8 @@
 Abreviation.create([
   { :name => "computed tomography", :created_at => "2013-09-08 04:52:03", :rid => 10321, :updated_at => "2013-09-08 04:52:03", :abreviated_name => "ct" },
   { :name => "magnetic resonance imaging", :created_at => "2013-09-08 05:16:41", :rid => 10312, :updated_at => "2013-09-08 05:16:41", :abreviated_name => "mr" },
-  { :name => "magnetic resonance imaging", :created_at => "2013-09-08 05:16:48", :rid => 10312, :updated_at => "2013-09-08 05:16:48", :abreviated_name => "mri" }
+  { :name => "magnetic resonance imaging", :created_at => "2013-09-08 05:16:48", :rid => 10312, :updated_at => "2013-09-08 05:16:48", :abreviated_name => "mri" },
+  { :name => "thorax", :created_at => "2013-09-08 22:32:15", :rid => 1243, :updated_at => "2013-09-08 22:32:15", :abreviated_name => "chest" }
 ], :without_protection => true )
 
 
