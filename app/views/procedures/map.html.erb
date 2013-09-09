@@ -1,3 +1,12 @@
+<script>
+$( document ).ready(function() { 
+	$(".toggler").click(function () {
+		$(".toggle").toggle('slow');
+	});
+});
+
+</script>
+
 <%- model_class = Term -%>
 <div class="page-header">
   <h1>Mapping Your Search "<%= params[:name] %>"</h1>
@@ -18,7 +27,7 @@
 
 <br class="table table-striped"/>
 
-<h4>List of all RadLex terms that match to your request with list of associated Playbook terms </h4><br />
+<h4>List of all RadLex terms that match to your request with list of associated Playbook terms </h4><button class="toggler">Toggle Playbook Entries</button><br />
 
 <table class="table table-striped">
   <thead>
@@ -31,10 +40,10 @@
     <% @termsarray.each do |terms| %>
 			<% terms.each do |term| %>
       <tr>
-        <td><%= link_to term.name, term_path(term) %></td>
-        <td>
+        <td><%= link_to term.name, term_path(term) %> </td>
+        <td style="display: none" class="toggle">
 					<% term.procedures.each do |proc| %>
-						<%= proc.short_name %><br />
+						<%= proc.short_name %>,
         
 					<% end %>
         </td>

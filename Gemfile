@@ -11,7 +11,7 @@ gem 'json'
 gem 'kaminari'
 gem 'seed_dump'
 #gem 'thinking-sphinx', '~> 3.0.2'
-gem 'mysql2'
+#gem 'mysql2'
 
 gem "pg"
 
