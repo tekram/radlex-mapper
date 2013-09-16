@@ -6,12 +6,48 @@ class Procedure < ActiveRecord::Base
 	
 	has_and_belongs_to_many :terms
 	
+	#checks to see which 
+	def self.pbm
+				CSV.foreach("mrsheet.csv") do |row|
+					length = row.length
+					
+				end
+	end
+	
+	def self.exclusiveMatch(radlexmatches,intersection)
+		#radlexmatches = [1,2]
+		#intersection 
+		puts radlexmatches.length
+		puts intersection
+		length = radlexmatches.length + 1
+		excl = nil
+		intersection.each{|proc|
+			if proc.terms.length == length
+				excl = proc
+				#break
+			end
+		}
+		return excl
+	end
+	
 	def self.findIntersection(array)
 		count = 1
-		array = array.flatten
+		#array = array.flatten
 		res = array[0].procedures
 		array.each {|ele|
 			res = ele.procedures & res
+		}
+		return res
+	end
+	
+	def self.bestMatch(array)
+		res = nil
+		length = 999999
+		array.each{|proc|
+			if proc.terms.length < length
+				length = proc.terms.length
+				res = proc
+			end
 		}
 		return res
 	end

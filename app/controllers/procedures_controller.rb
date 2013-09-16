@@ -22,10 +22,13 @@ class ProceduresController < ApplicationController
   end
 
 	def map
-		parsedterms = params[:name].split(" ") if params[:name]
+		parsedterms = params[:name].downcase.split(" ") if params[:name]
+		parsedterms = Term.checkTwo(parsedterms)
 		parsedterms = Term.substituteTerms(parsedterms)
 		@termsarray = Term.findRadlex(parsedterms) if params[:name]
 		@intersection = Procedure.findIntersection(@termsarray)
+		@best = Procedure.bestMatch(@intersection)
+		@exclusive = Procedure.exclusiveMatch(@termsarray, @intersection)
 	end
 
   # GET /procedures/new

@@ -9,7 +9,7 @@
   <dt><strong><%= model_class.human_attribute_name(:rid) %>:</strong></dt>
   <dd><%= @term.rid %></dd>
   <dt><strong><%= model_class.human_attribute_name(:rid_parent) %>:</strong></dt>
-  <dd><%= @term.rid_parent %></dd>
+  <dd><%= @term.rid_parent %> <% if !@term.parent.nil? %> (<%= link_to @term.parent.name, term_path(@term.parent) %>) <% end %></dd>
 </dl>
 
 Playbook Terms that this RadLex term is mapped to. 

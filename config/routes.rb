@@ -1,5 +1,9 @@
 Mapped::Application.routes.draw do
 
+  resources :conjunctions
+
+  resources :extraneous
+
   resources :abreviations
 
   resources :procedures do

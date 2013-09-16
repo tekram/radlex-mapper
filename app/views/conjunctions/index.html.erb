@@ -1,0 +1,23 @@
+<h1>Listing conjunctions</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @conjunctions.each do |conjunction| %>
+  <tr>
+    <td><%= conjunction.name %></td>
+    <td><%= link_to 'Show', conjunction %></td>
+    <td><%= link_to 'Edit', edit_conjunction_path(conjunction) %></td>
+    <td><%= link_to 'Destroy', conjunction, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Conjunction', new_conjunction_path %>

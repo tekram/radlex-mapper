@@ -7,28 +7,52 @@ class Term < ActiveRecord::Base
   belongs_to :parent, :class_name => "Term", :foreign_key => "rid_parent"
   has_and_belongs_to_many :procedures
   
+  # goes through an array of terms and maps them to RadLex Terms
   def self.findRadlex(terms)
 		res = Array.new
-		count = 0
+		#count = 0
 		radlex_terms = Array.new
+		terms = Term.removeRedundancy(terms)
 		terms.each{|term|
-			radlex_term = Array.new
-			radlex_terms = Term.where("name LIKE ?", "%#{term}%")
-			radlex_terms_w_procedures = Array.new
+
+			high = 0
+			highestterm = nil
+			if !Conjunction.find_by_name(term).nil?
+				next
+			end
+			#first check to see if the term exists exaclty as present in the query
+			radlex_terms = Term.where("name LIKE ?", term)
+			#then do a more wild card check for it
+			radlex_terms = Term.where("name LIKE ?", "%#{term}%") if radlex_terms.empty? or radlex_terms[0].procedures.empty?
+			if radlex_terms.empty? and (term.index("gram") or term.index("graphy"))
+				if term.index("gram")
+					term = term.gsub("gram","graphy")
+				else
+					term = term.gsub("graphy", "gram")
+				end
+				radlex_terms = Term.where("name LIKE ?", "%#{term}%")
+			end
 			radlex_terms.each{|rterm|
-				if !rterm.procedures.empty?
-					radlex_terms_w_procedures << rterm
+				if !rterm.procedures.empty? and rterm.procedures.length > high
+					highestterm = rterm
+					high = rterm.procedures.length
 				end
 			}
-			res[count] = radlex_terms_w_procedures
-			count = count + 1
+			res << highestterm if highestterm
+
 		}
 		return res
   end
   
+  # Substitutes abdomen for abd
   def self.substituteTerms(terms)
 		count = 0
 		terms.each{|term|
+			# hack for now to account when one abreviated term applies to more than on RadLex term
+			if term == "mra" or term == "cta"
+				term = term[0..1]
+				terms << "angiography"
+			end
 			subterm = Abreviation.find_by_abreviated_name(term)
 			if subterm
 				terms[count] = subterm.name
@@ -36,6 +60,47 @@ class Term < ActiveRecord::Base
 			count = count + 1
 		}
 		return terms
+  end
+  
+  def self.checkTwo(array)
+		position = 0
+		length = array.length
+		result = Array.new
+		while position + 1 < length
+			query = array[position] + " " + array[position + 1]
+			radlex_terms = Term.where("name LIKE ?", "%#{query}%")
+			if radlex_terms.empty?
+				result << array[position]
+			else
+				high = 0
+				highestterm = nil
+				radlex_terms.each{|rterm|
+					if !rterm.procedures.empty? and rterm.procedures.length > high
+						highestterm = rterm
+						high = rterm.procedures.length
+					end
+				}
+				if highestterm != nil
+					result << array[position] + " " + array[position + 1]
+					position = position + 1
+				else
+					result << array[position]
+				end
+			end
+			position = position + 1
+			if position + 1 == length
+				result << array[position]
+			end
+		end
+		return result
+  end
+  
+  def self.removeRedundancy(array)
+		if array.index("unilateral") and (array.index("right") or array.index("left"))
+			return array - ["unilateral"]
+		else
+			return array
+		end
   end
   
 	def self.import

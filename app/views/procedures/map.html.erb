@@ -12,6 +12,11 @@ $( document ).ready(function() {
   <h1>Mapping Your Search "<%= params[:name] %>"</h1>
 </div>
 
+Exclusive match by unique combo of Radlex is <% if @exclusive %><%= link_to @exclusive.short_name, procedure_path(@exclusive) %>(<%= @exclusive.id %>)<% end %>
+<br />
+Best match is 
+<% if @best %><%= link_to @best.short_name, procedure_path(@best) %>(<%= @best.id %>)<% end %>
+
 <h4>List of possible Playbook terms that map to your request </h4><br />
 
 <% @intersection.each do |proc| %>
@@ -37,8 +42,8 @@ $( document ).ready(function() {
     </tr>
   </thead>
   <tbody>
-    <% @termsarray.each do |terms| %>
-			<% terms.each do |term| %>
+    <% @termsarray.each do |term| %>
+			
       <tr>
         <td><%= link_to term.name, term_path(term) %> </td>
         <td style="display: none" class="toggle">
@@ -49,7 +54,6 @@ $( document ).ready(function() {
         </td>
 
       </tr>
-      <% end %>
     <% end %>
   </tbody>
 </table>
