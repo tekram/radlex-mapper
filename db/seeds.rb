@@ -6,7 +6,15 @@ Abreviation.create([
   { :name => "computed tomography", :created_at => "2013-09-08 04:52:03", :rid => 10321, :updated_at => "2013-09-08 04:52:03", :abreviated_name => "ct" },
   { :name => "magnetic resonance imaging", :created_at => "2013-09-08 05:16:41", :rid => 10312, :updated_at => "2013-09-08 05:16:41", :abreviated_name => "mr" },
   { :name => "magnetic resonance imaging", :created_at => "2013-09-08 05:16:48", :rid => 10312, :updated_at => "2013-09-08 05:16:48", :abreviated_name => "mri" },
-  { :name => "thorax", :created_at => "2013-09-08 22:32:15", :rid => 1243, :updated_at => "2013-09-08 22:32:15", :abreviated_name => "chest" }
+  { :name => "thorax", :created_at => "2013-09-08 22:32:15", :rid => 1243, :updated_at => "2013-09-08 22:32:15", :abreviated_name => "chest" },
+  { :name => "temporomandibular joint", :created_at => "2013-09-12 20:28:13", :rid => 9779, :updated_at => "2013-09-12 20:28:13", :abreviated_name => "tmj" },
+  { :name => "arthrography", :created_at => "2013-09-12 23:39:31", :rid => 10373, :updated_at => "2013-09-12 23:40:53", :abreviated_name => "arthrogram" }
+], :without_protection => true )
+
+
+
+Conjunction.create([
+  { :name => "and", :created_at => "2013-09-12 19:54:13", :updated_at => "2013-09-12 19:54:13" }
 ], :without_protection => true )
 
 
