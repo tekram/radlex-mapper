@@ -25,6 +25,7 @@ class ProceduresController < ApplicationController
 		parsedterms = params[:name].downcase.split(" ") if params[:name]
 		parsedterms = Term.checkTwo(parsedterms)
 		parsedterms = Term.substituteTerms(parsedterms)
+		parseterms = Term.contrastCheck(params[:name],parsedterms)
 		@termsarray = Term.findRadlex(parsedterms) if params[:name]
 		@intersection = Procedure.findIntersection(@termsarray)
 		@best = Procedure.bestMatch(@intersection)

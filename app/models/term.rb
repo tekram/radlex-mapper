@@ -62,6 +62,21 @@ class Term < ActiveRecord::Base
 		return terms
   end
   
+  def self.contrastCheck(string, array)
+		if string.index("with contrast")
+			array.delete("with")
+			array.delete("contrast")
+			array << "with iv contrast"
+		elsif string.index("with and without contrast")	
+			array.delete("with")
+			array.delete("without")
+			array.delete("contrast")
+			array << "without then with iv contrast"
+		end
+		
+		return array
+  end
+  
   def self.checkTwo(array)
 		position = 0
 		length = array.length
