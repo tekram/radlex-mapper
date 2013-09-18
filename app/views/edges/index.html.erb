@@ -1,0 +1,25 @@
+<h1>Listing edges</h1>
+
+<table>
+  <tr>
+    <th>Term</th>
+    <th>Weight</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @edges.each do |edge| %>
+  <tr>
+    <td><%= edge.term_id %></td>
+    <td><%= edge.weight %></td>
+    <td><%= link_to 'Show', edge %></td>
+    <td><%= link_to 'Edit', edit_edge_path(edge) %></td>
+    <td><%= link_to 'Destroy', edge, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Edge', new_edge_path %>

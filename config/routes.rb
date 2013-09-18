@@ -1,5 +1,9 @@
 Mapped::Application.routes.draw do
 
+  resources :edges
+
+  resources :nodes
+
   resources :conjunctions
 
   resources :extraneous

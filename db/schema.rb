@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130912195208) do
+ActiveRecord::Schema.define(:version => 20130918013416) do
 
   create_table "abreviations", :force => true do |t|
     t.string   "name"
@@ -21,6 +21,20 @@ ActiveRecord::Schema.define(:version => 20130912195208) do
   end
 
   create_table "conjunctions", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "edges", :force => true do |t|
+    t.integer  "term_id"
+    t.integer  "node_id"
+    t.integer  "weight"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "nodes", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false

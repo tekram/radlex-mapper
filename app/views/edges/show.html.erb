@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Term:</b>
+  <%= @edge.term_id %>
+</p>
+
+<p>
+  <b>Weight:</b>
+  <%= @edge.weight %>
+</p>
+
+
+<%= link_to 'Edit', edit_edge_path(@edge) %> |
+<%= link_to 'Back', edges_path %>

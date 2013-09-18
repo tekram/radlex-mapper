@@ -32,6 +32,9 @@ class Term < ActiveRecord::Base
 				end
 				radlex_terms = Term.where("name LIKE ?", "%#{term}%")
 			end
+			if radlex_terms.empty?
+				radlex_terms = Array.new << Node.find_by_string(term).strongest
+			end
 			radlex_terms.each{|rterm|
 				if !rterm.procedures.empty? and rterm.procedures.length > high
 					highestterm = rterm
