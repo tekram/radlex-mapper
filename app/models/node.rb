@@ -42,7 +42,7 @@ class Node < ActiveRecord::Base
 
 	#used to import existing mappings; first column is the RPID and the second column is the name
 	def self.import#Mappings
-		CSV.foreach("stanfordmr.csv") do |row|
+		CSV.foreach("navalxr.csv") do |row|
 				puts row[0]
 				rawstring = row[1]
 				contrast = String.new
