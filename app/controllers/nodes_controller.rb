@@ -13,7 +13,7 @@ class NodesController < ApplicationController
   # GET /nodes/1
   # GET /nodes/1.json
   def show
-    @node = Node.find(params[:id])
+    @node = Node.find_by_name(params[:id]) #Node.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb

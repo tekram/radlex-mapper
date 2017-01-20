@@ -20,8 +20,17 @@ class Term < ActiveRecord::Base
 			if !Conjunction.find_by_name(term).nil?
 				next
 			end
-			#first check to see if the term exists exaclty as present in the query
+			puts term
+			puts "=============================="
+			#first check to see if the term exists exactly as present in the query
 			radlex_terms = Term.where("name LIKE ?", term)
+			if radlex_terms.empty?
+				puts "---------------------------"
+				puts term
+				puts Node.find_by_name(term)
+				puts "--done--"
+				radlex_terms = Array.new << Node.find_by_name(term).strongest if Node.find_by_name(term)
+			end
 			#then do a more wild card check for it
 			radlex_terms = Term.where("name LIKE ?", "%#{term}%") if radlex_terms.empty? or radlex_terms[0].procedures.empty?
 			if radlex_terms.empty? and (term.index("gram") or term.index("graphy"))
@@ -31,9 +40,6 @@ class Term < ActiveRecord::Base
 					term = term.gsub("graphy", "gram")
 				end
 				radlex_terms = Term.where("name LIKE ?", "%#{term}%")
-			end
-			if radlex_terms.empty?
-				radlex_terms = Array.new << Node.find_by_string(term).strongest
 			end
 			radlex_terms.each{|rterm|
 				if !rterm.procedures.empty? and rterm.procedures.length > high
@@ -66,15 +72,22 @@ class Term < ActiveRecord::Base
   end
   
   def self.contrastCheck(string, array)
-		if string.index("with contrast")
+  		string = string.downcase
+		if string.index("with contrast") or string.index("with iv contrast")
 			array.delete("with")
 			array.delete("contrast")
-			array << "with iv contrast"
+			array.delete("iv")
+			array << "imaging with IV contrast"
 		elsif string.index("with and without contrast")	
 			array.delete("with")
 			array.delete("without")
 			array.delete("contrast")
-			array << "without then with iv contrast"
+			array << "imaging without then with IV contrast"
+		elsif string.index("without iv contrast") or string.index("without contrast")
+			array.delete("without")
+			array.delete("contrast") 
+			array.delete("iv")
+			array << "imaging without IV contrast"
 		end
 		
 		return array
@@ -122,9 +135,9 @@ class Term < ActiveRecord::Base
   end
   
 	def self.import
-		CSV.foreach("Radlex3.9.csv") do |row|
+		CSV.foreach("Radlex.csv") do |row|
 			#Term.create(
-			#puts row
+			puts row[0]
 			rid = row[1].sub("RID","") if row[1] != nil
 			rid_parent = row[2].sub("RID","") if row[2] != nil
 			Term.create(:name => row[0], :rid => rid, :rid_parent => rid_parent)

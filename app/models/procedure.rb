@@ -53,7 +53,7 @@ class Procedure < ActiveRecord::Base
 	end
 	
 	def self.import
-		CSV.foreach("playbook.csv") do |row|
+		CSV.foreach("playbook-public.csv") do |row|
 			#puts row[0]
 			#Term.create(
 			rpid = row[0].sub("RPID","") if row[0] != nil

@@ -7,7 +7,24 @@
 
 <p>
   <b>Edge:</b>
-  <%= @node.edge_id %>
+  <table>
+  <tr>
+    <th>Term</th>
+    <th>Weight</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+  <% @node.edges.each do |edge| %>
+  <tr>
+    <td><%= edge.term.name %></td>
+    <td><%= edge.weight %></td>
+    <td><%= link_to 'Show', edge %></td>
+    <td><%= link_to 'Edit', edit_edge_path(edge) %></td>
+    <td><%= link_to 'Destroy', edge, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
 </p>
 
 

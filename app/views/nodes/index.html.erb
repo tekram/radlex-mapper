@@ -12,7 +12,7 @@
 <% @nodes.each do |node| %>
   <tr>
     <td><%= node.name %></td>
-    <td><%= node.edge_id %></td>
+    <td><%= node.edges %></td>
     <td><%= link_to 'Show', node %></td>
     <td><%= link_to 'Edit', edit_node_path(node) %></td>
     <td><%= link_to 'Destroy', node, :confirm => 'Are you sure?', :method => :delete %></td>

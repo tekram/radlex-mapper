@@ -8,19 +8,29 @@ class Node < ActiveRecord::Base
 		edges = self.edges[0].term
 	end
 
+	#uses the Playbook itself to learn 
 	def self.importpb
+		#Node.delete_all
+		#Edge.delete_all
 		Procedure.all.each{|proc|
-			strings = proc.short_name.downcase.gsub("&","").split(" ")
+			strings = proc.long_name.downcase.gsub("&","").split(" ")
+			puts proc.rpid 
+			puts proc.short_name.downcase.gsub("&","")
 			strings.each{|string|
 				node = Node.find_or_create_by_name(string)
+				#puts node.name
 				proc.terms.each{|radlex|
 					if radlex.id == 13060
 						next
 					end
+					#puts "radlex"
+					#puts radlex.name
 					edges = node.edges.where(:term_id => radlex.id)
+					#puts "edges"
 					if edges.empty?
 						node.edges << Edge.create(:term_id => radlex.id, :weight => 0)
 					else
+						#puts "edge"
 						edge = edges[0]
 						edge.weight = edge.weight + 1
 						edge.save
@@ -30,8 +40,9 @@ class Node < ActiveRecord::Base
 		}
 	end
 
+	#used to import existing mappings; first column is the RPID and the second column is the name
 	def self.import#Mappings
-		CSV.foreach("xrmappings.csv") do |row|
+		CSV.foreach("nmmappings.csv") do |row|
 				puts row[0]
 				rawstring = row[1]
 				contrast = String.new
