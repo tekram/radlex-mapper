@@ -13,9 +13,12 @@ class Node < ActiveRecord::Base
 		#Node.delete_all
 		#Edge.delete_all
 		Procedure.all.each{|proc|
-			strings = proc.long_name.downcase.gsub("&","").split(" ")
+			if !proc.auto_short_name
+				next
+			end
+			strings = proc.auto_short_name.downcase.gsub("&","").split(" ")
 			puts proc.rpid 
-			puts proc.short_name.downcase.gsub("&","")
+			puts proc.auto_short_name.downcase.gsub("&","")
 			strings.each{|string|
 				node = Node.find_or_create_by_name(string)
 				#puts node.name
@@ -42,7 +45,7 @@ class Node < ActiveRecord::Base
 
 	#used to import existing mappings; first column is the RPID and the second column is the name
 	def self.import#Mappings
-		CSV.foreach("navalxr.csv") do |row|
+		CSV.foreach("datasources/xrmappings.csv") do |row|
 				puts row[0]
 				rawstring = row[1]
 				contrast = String.new

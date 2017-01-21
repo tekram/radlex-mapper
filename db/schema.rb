@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130918013416) do
+ActiveRecord::Schema.define(:version => 20170120041916) do
 
   create_table "abreviations", :force => true do |t|
     t.string   "name"
@@ -46,8 +46,10 @@ ActiveRecord::Schema.define(:version => 20130918013416) do
     t.string   "short_name"
     t.string   "long_name"
     t.text     "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+    t.string   "auto_short_name"
+    t.string   "auto_long_name"
   end
 
   create_table "procedures_terms", :id => false, :force => true do |t|
