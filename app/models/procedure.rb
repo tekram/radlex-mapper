@@ -53,16 +53,17 @@ class Procedure < ActiveRecord::Base
 	end
 	
 	def self.import
-		CSV.foreach("playbook.csv") do |row|
+		Procedure.delete_all
+		CSV.foreach("playbook-core.csv") do |row|
 			#puts row[0]
 			#Term.create(
 			rpid = row[0].sub("RPID","") if row[0] != nil
-			rids = row[7].gsub("RID","") if row[7] != nil
+			rids = row[4].gsub("RID","") if row[4] != nil
 			rids = rids.sub("|0","")
 			rids = rids.split("|")
 			procedure = Procedure.create(:rpid => rpid, :short_name => row[2],
-				:long_name => row[3], :description => row[6], :auto_short_name => row[4], 
-				:auto_long_name => row[5])
+				:long_name => row[3])#, :description => row[6], 
+				#:auto_long_name => row[5])
 			rids.each {|rid|
 				procedure.terms << Term.find(rid) if Term.exists?(rid)
 			}	
