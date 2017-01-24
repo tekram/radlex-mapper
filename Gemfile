@@ -10,6 +10,7 @@ gem 'twitter-bootstrap-rails'
 gem 'json'
 gem 'kaminari'
 gem 'seed_dump'
+gem 'test-unit'
 #gem 'thinking-sphinx', '~> 3.0.2'
 #gem 'mysql2'
 

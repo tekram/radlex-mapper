@@ -17,6 +17,8 @@ Mapped::Application.routes.draw do
   end
   
   resources :terms
+  
+  root :to => 'procedures#index'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

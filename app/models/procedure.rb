@@ -53,7 +53,6 @@ class Procedure < ActiveRecord::Base
 	end
 	
 	def self.import
-		Procedure.delete_all
 		CSV.foreach("playbook-core.csv") do |row|
 			#puts row[0]
 			#Term.create(
